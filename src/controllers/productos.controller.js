@@ -39,9 +39,11 @@ export const registrarProducto = async (req, res) => {
       descripcion_producto, 
       id_categoria, 
       precio_unitario, 
-      stock, 
-      imagen 
+      stock
     } = req.body;
+
+    // Si multer procesó un archivo, estará en req.file
+    const imagen = req.file ? `/uploads/${req.file.filename}` : req.body.imagen || null;
 
     // Validación básica de campos requeridos
     if (!nombre_producto || !id_categoria || !precio_unitario || !stock) {
@@ -144,5 +146,7 @@ export const eliminarProducto = async (req, res) => {
     });
   }
 };
+
+
 
 
