@@ -32,7 +32,8 @@ CREATE TABLE Empleados (
 CREATE TABLE Usuarios (
     id_usuario INT AUTO_INCREMENT PRIMARY KEY,
     usuario VARCHAR(20),
-    contraseña VARCHAR(20)
+    contraseña VARCHAR(20),
+    role VARCHAR(20) DEFAULT 'usuario'
 );
 
 -- Tabla Categorias: almacena las categorías de los productos
@@ -142,10 +143,11 @@ INSERT INTO Empleados (primer_nombre, segundo_nombre, primer_apellido, segundo_a
 ('Pedro', 'José', 'Sánchez', 'García', '85553333', 'Gerente', '2023-11-10');
 
 -- Inserciones en Usuarios (independiente en este diseño)
-INSERT INTO Usuarios (usuario, contraseña) VALUES
-('eli', 'eli2025'),
-('javier51', '123456'),
-('cruz51', '20252025');
+-- Se asigna rol: 'administrador' para un usuario de ejemplo y 'usuario' por defecto para los demás
+INSERT INTO Usuarios (usuario, contraseña, role) VALUES
+('eli', 'eli2025', 'administrador'),
+('javier51', '123456', 'usuario'),
+('cruz51', '20252025', 'usuario');
 
 -- Inserciones en Productos (depende de Categorias)
 INSERT INTO Productos (nombre_producto, descripcion_producto, id_categoria, precio_unitario, stock, imagen) VALUES

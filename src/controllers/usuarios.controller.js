@@ -39,8 +39,13 @@ export const verificarUsuario = async (req, res) => {
       'SELECT * FROM usuarios WHERE usuario = ? AND contraseña = ?',
       [usuario, contraseña]
     );
-    res.json(result.length > 0); // Devuelve true o false directamente
+    if (result.length > 0) {
+      // Devolver el objeto usuario (incluye rol si existe)
+      res.json(result[0]);
+    } else {
+      res.status(401).json({ mensaje: 'Credenciales inválidas' });
+    }
   } catch (error) {
-    res.status(500).json(false);
+    res.status(500).json({ mensaje: 'Error del servidor' });
   }
 };
