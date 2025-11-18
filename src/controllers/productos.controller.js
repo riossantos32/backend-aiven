@@ -51,7 +51,7 @@ export const registrarProducto = async (req, res) => {
     }
 
     const [result] = await pool.query(
-      'INSERT INTO Productos (nombre_producto, descripcion_producto, id_categoria, precio_unitario, stock, imagen) VALUES (?, ?, ?, ?, ?, ?)',
+      'INSERT INTO productos (nombre_producto, descripcion_producto, id_categoria, precio_unitario, stock, imagen) VALUES (?, ?, ?, ?, ?, ?)',
       [
         nombre_producto,
         descripcion_producto || null, // Puede ser opcional
@@ -76,7 +76,7 @@ export const registrarProducto = async (req, res) => {
 
 export const eliminarProducto = async (req, res) => {
   try {
-    const [result] = await pool.query('DELETE FROM Productos WHERE id_producto = ?', [req.params.id]);
+    const [result] = await pool.query('DELETE FROM productos WHERE id_producto = ?', [req.params.id]);
 
     if (result.affectedRows === 0) {
       return res.status(404).json({

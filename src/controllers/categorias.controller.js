@@ -37,7 +37,7 @@ export const registrarCategoria = async (req, res) => {
     const { nombre_categoria, descripcion_categoria } = req.body;
 
     const [result] = await pool.query(
-      'INSERT INTO Categorias (nombre_categoria, descripcion_categoria) VALUES (?, ?)',
+      'INSERT INTO categorias (nombre_categoria, descripcion_categoria) VALUES (?, ?)',
       [nombre_categoria, descripcion_categoria]
     );
 
@@ -52,7 +52,7 @@ export const registrarCategoria = async (req, res) => {
 
 export const eliminarCategoria = async (req, res) => {
   try {
-    const [result] = await pool.query('DELETE FROM Categorias WHERE id_categoria = ?', [req.params.id]);
+    const [result] = await pool.query('DELETE FROM categorias WHERE id_categoria = ?', [req.params.id]);
 
     if (result.affectedRows === 0) {
       return res.status(404).json({
